@@ -12,7 +12,7 @@ just pass a root folder under witch your needed modules can be found, and the mo
 ex:
 
 mvn modgwt:gwt-run -Dmodgwt.search=ROOT_SEARCH_FOLDER -Dmodgwt.includes=GWT-MODULE1,GWT-MODULE2
-or
+
 mvn modgwt:gwt-debug -Dmodgwt.search=ROOT_SEARCH_FOLDER -Dmodgwt.includes=GWT-MODULE1,GWT-MODULE2
 
 
