@@ -89,20 +89,16 @@ public class ModGwtRunMojo extends AbstractMojo {
     protected PluginManager pluginManager;
 
     /**
-     * .
-     *
      * <p>top folder from which we will scan for additional artifacts</p>
      *
-     * . @parameter default-value="." expression="${modgwt.search}" @required
+     * @parameter  default-value="." expression="${modgwt.search}" @required
      */
     protected File searchRoot;
 
     /**
-     * .
-     *
      * <p>additional artifacts that should be translated to js for hosted mode</p>
      *
-     * . @parameter expression="${modgwt.includes}"
+     * @parameter  expression="${modgwt.includes}"
      */
     protected String includes;
 
