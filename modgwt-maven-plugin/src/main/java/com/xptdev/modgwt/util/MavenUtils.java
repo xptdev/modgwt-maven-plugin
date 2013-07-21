@@ -61,7 +61,7 @@ public class MavenUtils {
 
         for (Path childDir : stream) {
 
-            // If we find the right pom file return it.
+            // If we find the right pom file return it
             Path pomFile = childDir.resolve("pom.xml");
 
             if (Files.exists(pomFile)) {

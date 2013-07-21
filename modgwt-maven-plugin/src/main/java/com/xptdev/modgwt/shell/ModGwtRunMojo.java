@@ -92,6 +92,7 @@ public class ModGwtRunMojo extends AbstractMojo {
      * .
      *
      * <p>top folder from which we will scan for additional artifacts</p>
+     *
      * . @parameter default-value="." expression="${modgwt.search}" @required
      */
     protected File searchRoot;
@@ -100,6 +101,7 @@ public class ModGwtRunMojo extends AbstractMojo {
      * .
      *
      * <p>additional artifacts that should be translated to js for hosted mode</p>
+     *
      * . @parameter expression="${modgwt.includes}"
      */
     protected String includes;

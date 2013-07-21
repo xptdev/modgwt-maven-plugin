@@ -53,6 +53,7 @@ public class ModGwtDebugMojo extends ModGwtRunMojo {
                 executeMojo(getGwtPlugin(), goal("debug"), (Xpp3Dom) gwtPlugin.getConfiguration(),
                     executionEnvironment(project, session, pluginManager));
             } else {
+
                 getLog().error("gwt-maven-plugin not found in project plugins!");
             }
 
