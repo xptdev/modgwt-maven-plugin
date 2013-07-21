@@ -223,9 +223,9 @@ public class ModGwtRunMojo extends AbstractMojo {
                 getLog().info("Resource folder for" + id + " not found!");
             }
         } else {
-            for (Resource r : resources) {
-                project.addResource(r);
-                getLog().info("Added resource folder " + r.getDirectory() + " from " + id);
+            for (Resource resource : resources) {
+                execProject.addResource(resource);
+                getLog().info("Added resource folder " + resource.getDirectory() + " from " + id);
 
             }
         }
