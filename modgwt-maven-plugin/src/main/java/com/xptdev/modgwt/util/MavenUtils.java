@@ -28,12 +28,27 @@ import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
+/**
+ * The Class MavenUtils.
+ */
 public class MavenUtils {
 
+    /**
+     * Find child pom.
+     *
+     * @param   projectName  the project name
+     * @param   currentDir   the current dir
+     *
+     * @return  the path
+     *
+     * @throws  IOException             Signals that an I/O exception has occurred.
+     * @throws  XmlPullParserException  the xml pull parser exception
+     */
     public static Path findChildPom(final String projectName, final Path currentDir) throws IOException,
         XmlPullParserException {
 
         DirectoryStream.Filter<Path> filter = new DirectoryStream.Filter<Path>() {
+
             public boolean accept(final Path file) throws IOException {
                 String fileName = file.getFileName().toString();
 
@@ -67,6 +82,16 @@ public class MavenUtils {
 
     }
 
+    /**
+     * Parses the maven model.
+     *
+     * @param   pomFile  the pom file
+     *
+     * @return  the model
+     *
+     * @throws  IOException             Signals that an I/O exception has occurred.
+     * @throws  XmlPullParserException  the xml pull parser exception
+     */
     public static Model parseMavenModel(final Path pomFile) throws IOException, XmlPullParserException {
 
         Model model = null;

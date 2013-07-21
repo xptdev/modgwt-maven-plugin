@@ -37,6 +37,9 @@ import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
  */
 public class ModGwtDebugMojo extends ModGwtRunMojo {
 
+    /* (non-Javadoc)
+     * @see com.xptdev.modgwt.shell.ModGwtRunMojo#execute()
+     */
     public void execute() throws MojoExecutionException, MojoFailureException {
 
         try {

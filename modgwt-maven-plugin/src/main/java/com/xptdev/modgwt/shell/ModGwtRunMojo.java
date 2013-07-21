@@ -89,20 +89,24 @@ public class ModGwtRunMojo extends AbstractMojo {
     protected PluginManager pluginManager;
 
     /**
-     * <p>top folder from which we will scan for additional artifacts</p>
+     * .
      *
-     * @parameter  default-value="." expression="${modgwt.search}"
-     * @required
+     * <p>top folder from which we will scan for additional artifacts</p>
+     * . @parameter default-value="." expression="${modgwt.search}" @required
      */
     protected File searchRoot;
 
     /**
-     * <p>additional artifacts that should be translated to js for hosted mode</p>
+     * .
      *
-     * @parameter  expression="${modgwt.includes}"
+     * <p>additional artifacts that should be translated to js for hosted mode</p>
+     * . @parameter expression="${modgwt.includes}"
      */
     protected String includes;
 
+    /* (non-Javadoc)
+     * @see org.apache.maven.plugin.AbstractMojo#execute()
+     */
     public void execute() throws MojoExecutionException, MojoFailureException {
 
         try {
@@ -124,6 +128,11 @@ public class ModGwtRunMojo extends AbstractMojo {
         }
     }
 
+    /**
+     * Gets the gwt plugin.
+     *
+     * @return  the gwt plugin
+     */
     protected Plugin getGwtPlugin() {
 
         List<Plugin> plugins = project.getBuildPlugins();
@@ -140,6 +149,12 @@ public class ModGwtRunMojo extends AbstractMojo {
         return null;
     }
 
+    /**
+     * Scan and include extra sources.
+     *
+     * @throws  IOException             Signals that an I/O exception has occurred.
+     * @throws  XmlPullParserException  the xml pull parser exception
+     */
     protected void scanAndIncludeExtraSources() throws IOException, XmlPullParserException {
         if (includes == null) {
             getLog().info("No include source artifacts defined!");
@@ -165,6 +180,14 @@ public class ModGwtRunMojo extends AbstractMojo {
 
     }
 
+    /**
+     * Include extra gwt sources.
+     *
+     * @param   pom  the pom
+     *
+     * @throws  IOException             Signals that an I/O exception has occurred.
+     * @throws  XmlPullParserException  the xml pull parser exception
+     */
     protected void includeExtraGwtSources(final Path pom) throws IOException, XmlPullParserException {
 
         Model model = MavenUtils.parseMavenModel(pom);
