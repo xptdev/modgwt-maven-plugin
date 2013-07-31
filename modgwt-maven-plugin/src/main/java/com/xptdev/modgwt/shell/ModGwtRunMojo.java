@@ -109,6 +109,7 @@ public class ModGwtRunMojo extends AbstractMojo {
     /* (non-Javadoc)
      * @see org.apache.maven.plugin.AbstractMojo#execute()
      */
+    @SuppressWarnings("deprecation")
     public void execute() throws MojoExecutionException, MojoFailureException {
 
         try {

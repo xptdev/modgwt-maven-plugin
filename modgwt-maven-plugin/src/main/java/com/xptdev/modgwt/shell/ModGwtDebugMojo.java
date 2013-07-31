@@ -46,6 +46,7 @@ public class ModGwtDebugMojo extends ModGwtRunMojo {
      *
      * @see com.xptdev.modgwt.shell.ModGwtRunMojo#execute()
      */
+    @SuppressWarnings("deprecation")
     public void execute() throws MojoExecutionException, MojoFailureException {
 
         try {
@@ -65,8 +66,7 @@ public class ModGwtDebugMojo extends ModGwtRunMojo {
                     env = executionEnvironment(project, session, pluginManager);
                 }
 
-                executeMojo(getGwtPlugin(), goal("debug"), (Xpp3Dom) gwtPlugin.getConfiguration(),
-                    executionEnvironment(project, session, pluginManager));
+                executeMojo(getGwtPlugin(), goal("debug"), (Xpp3Dom) gwtPlugin.getConfiguration(), env);
             } else {
 
                 getLog().error("gwt-maven-plugin not found in project plugins!");
