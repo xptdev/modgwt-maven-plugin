@@ -32,13 +32,17 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.Plugin;
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.BuildPluginManager;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.PluginManager;
 import org.apache.maven.project.MavenProject;
 
+import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+
+import org.twdata.maven.mojoexecutor.MojoExecutor.ExecutionEnvironment;
 
 import com.xptdev.modgwt.util.MavenUtils;
 
@@ -115,8 +119,16 @@ public class ModGwtRunMojo extends AbstractMojo {
 
                 scanAndIncludeExtraSources();
 
-                executeMojo(getGwtPlugin(), goal("run"), (Xpp3Dom) gwtPlugin.getConfiguration(),
-                    executionEnvironment(project, session, pluginManager));
+                ExecutionEnvironment env;
+                try {
+                    Object o = session.lookup("org.apache.maven.plugin.BuildPluginManager");
+
+                    env = executionEnvironment(project, session, (BuildPluginManager) o);
+                } catch (ComponentLookupException e) {
+                    env = executionEnvironment(project, session, pluginManager);
+                }
+
+                executeMojo(getGwtPlugin(), goal("run"), (Xpp3Dom) gwtPlugin.getConfiguration(), env);
             } else {
                 getLog().error("gwt-maven-plugin not found in project plugins!");
             }

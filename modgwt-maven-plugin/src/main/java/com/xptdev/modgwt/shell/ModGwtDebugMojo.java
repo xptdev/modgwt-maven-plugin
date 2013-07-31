@@ -23,11 +23,15 @@ import static org.twdata.maven.mojoexecutor.MojoExecutor.goal;
 import java.io.IOException;
 
 import org.apache.maven.model.Plugin;
+import org.apache.maven.plugin.BuildPluginManager;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
+import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+
+import org.twdata.maven.mojoexecutor.MojoExecutor.ExecutionEnvironment;
 
 /**
  * @goal                          gwt-debug
@@ -37,7 +41,9 @@ import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
  */
 public class ModGwtDebugMojo extends ModGwtRunMojo {
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     *
      * @see com.xptdev.modgwt.shell.ModGwtRunMojo#execute()
      */
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -49,6 +55,15 @@ public class ModGwtDebugMojo extends ModGwtRunMojo {
             if (gwtPlugin != null) {
 
                 scanAndIncludeExtraSources();
+
+                ExecutionEnvironment env;
+                try {
+                    Object o = session.lookup("org.apache.maven.plugin.BuildPluginManager");
+
+                    env = executionEnvironment(project, session, (BuildPluginManager) o);
+                } catch (ComponentLookupException e) {
+                    env = executionEnvironment(project, session, pluginManager);
+                }
 
                 executeMojo(getGwtPlugin(), goal("debug"), (Xpp3Dom) gwtPlugin.getConfiguration(),
                     executionEnvironment(project, session, pluginManager));
